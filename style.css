@@ -1,0 +1,236 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("heart-bg.jpg");
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+/* Envelope Screen */
+#envelope-container {
+    text-align: center;
+    cursor:pointer;
+}
+#envelope-container p {
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    cursor:pointer;
+}
+
+@keyframes pulse {
+    0% {
+        transform:scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#envelope{
+    width: 200px;
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+}
+
+#letter-container{
+    display: none;
+    position:fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter-window{
+    width: 70vw;
+    max-width: 600px;
+    aspect-ratio: 3/2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("window.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding-top: 130px;
+
+    transform: scale(1); /* antes 1.2 */
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+
+.letter-window.open {
+    transform: scale(1);
+    opacity: 1;
+}
+
+h1 {
+    font-size: 30px;
+    margin:0;
+}
+
+p {
+    font-size: 18px;
+}
+
+
+/* Cat */
+
+.cat {
+    width: 130px;
+    margin: 10px 0;
+    transition: width 0.4s ease;
+}
+
+.letter-window.final .cat {
+    width: 150px;
+}
+
+/* buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+}
+
+.no-wrapper{
+    position:relative;
+}
+
+.btn {
+    width: 120px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.yes-btn,
+.no-btn {
+width: 120px;
+height: auto;
+display: inline-block;
+}
+
+.yes-btn {
+    position: relative;
+    z-index: 2;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+.no-btn {
+    z-index: 1;
+    position: relative;
+    transition: transform 0.15s ease;
+    cursor: default;
+}
+
+.final-text{
+    font-size: 18px;
+    line-height: 1.4;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(255,240,240,0.5);
+    border-radius: 12px;
+}
+
+.next-link{
+    margin-top: 12px;
+    display: inline-block;
+    padding: 10px 16px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    border: 2px solid rgba(255, 120, 160, 0.6);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.next-link:hover{
+    transform: scale(1.05);
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE IPHONE */
+/* ============================= */
+
+@media (max-width: 430px){
+
+  .letter-window{
+    width: 92vw;
+    aspect-ratio: 3 / 2.45;
+
+    background-size: 100% 100%;
+    background-position: center;
+
+    justify-content: flex-start;
+
+    /* ✅ AJUSTE PRINCIPAL: baja el contenido para que encaje en el cuadrado */
+    padding-top: 108px;  /* antes ~92 */
+    padding-left: 14px;
+    padding-right: 14px;
+
+    /* ✅ Espaciado más controlado */
+    gap: 8px;
+  }
+
+  #letter-title{
+    font-size: clamp(14px, 4.2vw, 20px);
+    max-width: 86%;
+    line-height: 1.1;
+    text-align: center;
+    margin: 0;
+  }
+
+  .cat{
+    width: clamp(45px, 13vw, 85px);
+    margin: 0;
+  }
+
+  .letter-window.final .cat{
+    width: clamp(50px, 14vw, 95px);
+  }
+
+  .buttons{
+    gap: 10px;
+  }
+
+  .btn, .yes-btn, .no-btn{
+    width: clamp(48px, 16vw, 85px);
+    height: auto;
+  }
+
+  /* ✅ Para que el texto final y el botón SI entren en el cuadrado */
+  .final-text{
+    font-size: clamp(11px, 3.2vw, 14px);
+    padding: 8px 10px;
+    max-width: 86%;
+    margin: 0;
+  }
+
+  #next-link{
+    font-size: clamp(12px, 3.4vw, 16px);
+    padding: 8px 12px;
+    max-width: 80%;
+    margin-top: 6px;
+    text-align: center;
+  }
+}
+
+
+
+
+
+
