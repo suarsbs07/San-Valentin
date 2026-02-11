@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primario: #fff;
+  --fondo: #ffebf2;
+  --fondo-sobre: #ffe3ed;
+  --solapa-sobre: #ffccd5;
+  --cuerpo-sobre: #ffc1d1;
+  --sombra: rgba(0, 0, 0, 0.2);
+  --texto: #003049;
+  --corazon: #ff477e;
+
+  /* ✅ tamaños responsivos */
+  --w: min(92vw, 400px);      /* ancho del sobre */
+  --h: calc(var(--w) * 0.75); /* alto del sobre (400->300) */
+  --lift: calc(var(--h) - 10px); /* cuánto sube la carta */
+}
+
+body {
+  background: var(--fondo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 18px 12px; /* para que no se pegue a bordes en móvil */
+}
+
+/* ✅ título responsive */
+h1 {
+  font-family: "Marck Script", serif;
+  text-align: center;
+  font-size: clamp(34px, 10vw, 60px);
+  margin-bottom: clamp(18px, 5vw, 50px);
+  color: #444;
+  line-height: 1.05;
+  padding: 0 10px;
+}
+
+.contenedor {
+  width: var(--w);
+}
+
+/* envoltura */
+.envoltura-sobre {
+  position: relative;
+  background-color: var(--fondo-sobre);
+  box-shadow: 0 0 40px var(--sombra);
+  border-radius: 15px;
+  overflow: visible;
+}
+
+/* sobre */
+.sobre {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+}
+
+/* solapa superior */
+.sobre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+
+  /* ✅ triángulo proporcional */
+  border-top: calc(var(--h) * 0.60) solid var(--solapa-sobre);
+  border-right: calc(var(--w) / 2) solid transparent;
+  border-left: calc(var(--w) / 2) solid transparent;
+
+  transform-origin: top;
+  transition: all 0.5s ease-in-out 0.7s;
+  border-radius: 10px;
+}
+
+.solapa-derecha {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background-color: var(--cuerpo-sobre);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.solapa-izquierda {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  background-color: var(--cuerpo-sobre);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* carta */
+.carta {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primario);
+  text-align: center;
+  box-shadow: 0 0 5px var(--sombra);
+  padding: clamp(12px, 3vw, 20px);
+  border-radius: 10px;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* contenido scroll */
+.contenido {
+  font-family: "Gill Sans", Calibri, sans-serif;
+  color: var(--texto);
+  text-align: left;
+
+  font-size: clamp(11px, 3vw, 12px);
+  line-height: 1.25;
+
+  border: 3px dotted var(--texto);
+  padding: 10px;
+
+  height: 100%;
+  cursor: pointer;
+
+  overflow-y: auto; /* mejor que scroll fijo */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* corazón */
+.corazon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(22px, 6vw, 30px);
+  height: clamp(22px, 6vw, 30px);
+  background-color: var(--corazon);
+  transform: translate(-50%, 0) rotate(45deg);
+  transition: transform 0.5s ease-in-out 1s;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.corazon::before,
+.corazon::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--corazon);
+  border-radius: 100%;
+}
+
+.corazon::before {
+  top: calc(-0.5 * 100%);
+}
+
+.corazon::after {
+  right: 50%;
+}
+
+/* clases dinámicas */
+.abierto .sobre::before {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.abierto .corazon {
+  transform: rotate(90deg);
+  transition-delay: 0.4s;
+}
+
+/* ✅ movimiento proporcional (en vez de -290px fijo) */
+.carta.mostrar-carta {
+  transform: translateY(calc(-1 * var(--lift)));
+}
+
+.carta.cerrando-carta {
+  transform: translateY(calc(-1 * var(--lift)));
+}
+
+.carta.abierta {
+  z-index: 10000;
+}
+
+.envoltura-sobre.desactivar-sobre .sobre::before {
+  pointer-events: none;
+}
+
+/* ✅ ajuste extra para pantallas muy pequeñas */
+@media (max-width: 360px){
+  :root{
+    --w: min(94vw, 360px);
+  }
+}
+
+
+
+
+
+
