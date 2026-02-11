@@ -166,10 +166,10 @@ display: inline-block;
 /* 📱 RESPONSIVE IPHONE */
 /* ============================= */
 
-@media (max-width: 430px){
+@media (max-width: 730px){
 
   .letter-window{
-    width: 92vw;
+    width: 62vw;
     aspect-ratio: 3 / 2.45;
 
     background-size: 100% 100%;
