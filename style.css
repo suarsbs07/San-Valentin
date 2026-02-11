@@ -166,10 +166,10 @@ display: inline-block;
 /* 📱 RESPONSIVE IPHONE */
 /* ============================= */
 
-@media (max-width: 730px){
+@media (max-width: 430px){
 
   .letter-window{
-    width: 62vw;
+    width: 92vw;
     aspect-ratio: 3 / 2.45;
 
     background-size: 100% 100%;
@@ -178,7 +178,7 @@ display: inline-block;
     justify-content: flex-start;
 
     /* ✅ AJUSTE PRINCIPAL: baja el contenido para que encaje en el cuadrado */
-    padding-top: 108px;  /* antes ~92 */
+    padding-top: 130px;  /* antes ~92 */
     padding-left: 14px;
     padding-right: 14px;
 
@@ -188,15 +188,16 @@ display: inline-block;
 
   #letter-title{
     font-size: clamp(14px, 4.2vw, 20px);
-    max-width: 86%;
+    max-width: 56%;
     line-height: 1.1;
     text-align: center;
-    margin: 0;
+    margin: 30px;
   }
 
   .cat{
-    width: clamp(45px, 13vw, 85px);
     margin: 0;
+    width: 80px;
+
   }
 
   .letter-window.final .cat{
@@ -204,7 +205,7 @@ display: inline-block;
   }
 
   .buttons{
-    gap: 10px;
+    gap: 50px;
   }
 
   .btn, .yes-btn, .no-btn{
